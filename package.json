@@ -2,10 +2,10 @@
   "name": "surprize-labs-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bin/server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node ./bin/server.js",
+    "dev": "nodemon ./bin/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
