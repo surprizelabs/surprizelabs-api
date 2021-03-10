@@ -1,24 +1,14 @@
-require('dotenv').config();
-const config = require("./config")
-const axios = require('axios');
 const express = require('express');
-const path = require('path');
+const router = express.Router();
+const config = require("../config")
+const axios = require('axios');
 
-const app = express();
 
-app.use(express.static('static'));
-
-app.get('/', (req, res) => {
-    console.log()
-    res.sendFile(path.join(__dirname, '/static/index.html'));
+router.get('/login', (req, res) => {
+    res.redirect(`https://id.twitch.tv/oauth2/authorize?client_id=${config.twitchClientId}&redirect_uri=http://localhost:3000/auth/twitch/callback&response_type=code&scope=user:read:email`);
 });
 
-app.get('/auth', (req, res) => {
-    res.redirect(`https://id.twitch.tv/oauth2/authorize?client_id=${config.twitchClientId}&redirect_uri=http://localhost:3000/auth/twitch/callback&response_type=code&scope=user:read:email`,
-    );
-});
-
-app.get('/auth/twitch/token', (req, res) => {
+router.get('/token', (req, res) => {
 
     let token = data.access_token
     console.log('My token:', token);
@@ -27,7 +17,7 @@ app.get('/auth/twitch/token', (req, res) => {
 
 });
 
-app.get('/auth/twitch/callback', ({query: {code}}, res) => {
+router.get('/callback', ({query: {code}}, res) => {
     const body = {};
     const opts = {headers: {accept: 'application/json'}};
 
@@ -42,5 +32,5 @@ app.get('/auth/twitch/callback', ({query: {code}}, res) => {
         .catch((err) => res.status(500).json({err: err.message}));
 });
 
-app.listen(3000);
-console.log('App listening on port 3000');
+
+module.exports = router;
