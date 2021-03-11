@@ -2,20 +2,19 @@
   "name": "surprize-labs-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bin/server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node ./bin/server.js",
+    "dev": "nodemon ./bin/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
+    "helmet": "^3.23.3",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "passport": "^0.4.1",
-    "passport-github": "^1.1.0"
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
