@@ -8,14 +8,6 @@ router.get('/login', (req, res) => {
     res.redirect(`https://id.twitch.tv/oauth2/authorize?client_id=${config.twitchClientId}&redirect_uri=http://localhost:3000/auth/twitch/callback&response_type=code&scope=user:read:email`);
 });
 
-router.get('/token', (req, res) => {
-
-    let token = data.access_token
-    console.log('My token:', token);
-    console.log('My scope:', data.scope);
-    res.redirect(`/?token=${token}`);
-
-});
 
 router.get('/callback', ({query: {code}}, res) => {
     const body = {};
@@ -27,6 +19,7 @@ router.get('/callback', ({query: {code}}, res) => {
             let token = data.access_token
             console.log('My token:', token);
             console.log('My scope:', data.scope);
+            res.cookie(config.cookieName, token);
             res.redirect(`/?token=${token}`);
         })
         .catch((err) => res.status(500).json({err: err.message}));
